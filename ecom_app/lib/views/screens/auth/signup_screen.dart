@@ -3,6 +3,7 @@ import 'package:ecom_app/utils/theme.dart';
 import 'package:ecom_app/views/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../routes/routes.dart';
 import '../../../utils/my_string.dart';
 import '../../widgets/auth/auth_button.dart';
 import '../../widgets/auth/check_widget.dart';
@@ -31,7 +32,7 @@ final controller = Get.find<AuthController>();
       backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
       body: SingleChildScrollView(
         child: Column(children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 1.3,
             child: Padding(
@@ -141,7 +142,9 @@ final controller = Get.find<AuthController>();
             ),
           ),
           ContainerUnder(
-              onPressed: () {},
+              onPressed: () {
+                Get.offNamed(Routes.loginInScreen);
+              },
               text: 'Already Have an Account?',
               buttonText: 'Log in')
         ]),
