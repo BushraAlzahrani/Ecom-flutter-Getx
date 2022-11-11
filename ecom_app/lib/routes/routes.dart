@@ -1,6 +1,6 @@
+import 'package:ecom_app/logic/bindings/auth_binding.dart';
 import 'package:ecom_app/views/screens/auth/signup_screen.dart';
 import 'package:get/get.dart';
-
 import '../views/screens/auth/login_screen.dart';
 import '../views/screens/welcome_screen.dart';
 
@@ -19,7 +19,9 @@ class AppRoute {
       page: () => const LoginScreen()),
          GetPage(
       name: Routes.signUpScreen, 
-      page: () => const SignUpScreen())
+      page: () =>  SignUpScreen(),
+      binding: AuthBinding(),
+      ),
   ];
 }
 
