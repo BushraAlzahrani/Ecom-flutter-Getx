@@ -2,6 +2,7 @@ import 'package:ecom_app/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
@@ -9,6 +10,9 @@ class AuthController extends GetxController {
   bool isCheckBox = false;
   var displayUserName = '';
   var displayUserPhoto = '';
+  var isSignedIn = false;
+
+  final GetStorage authBox = GetStorage();
 
   FirebaseAuth auth = FirebaseAuth.instance;
   var googleSignIn = GoogleSignIn();
@@ -72,6 +76,10 @@ class AuthController extends GetxController {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => displayUserName = auth.currentUser!.displayName!);
+
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
+
       update();
       Get.offNamed(Routes.mainScreen);
     } on FirebaseAuthException catch (e) {
@@ -128,15 +136,38 @@ class AuthController extends GetxController {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       displayUserName = googleUser!.displayName!;
       displayUserPhoto = googleUser.photoUrl!;
+
+      isSignedIn = true;
+
+      authBox.write('auth', isSignedIn);
+
       update();
+
       Get.offNamed(Routes.mainScreen);
+
     } catch (error) {
       Get.snackbar('Error!', error.toString(),
           snackPosition: SnackPosition.TOP,
-          backgroundColor:Colors.red.shade200,
+          backgroundColor: Colors.red.shade200,
           colorText: Colors.white);
     }
   }
 
-  void signOutFromApp() {}
+  void signOutFromApp() async {
+    try {
+      await auth.signOut();
+      await googleSignIn.signOut();
+      displayUserName = '';
+      displayUserPhoto = '';
+      isSignedIn = false;
+      authBox.remove('auth');
+      update();
+      Get.offNamed(Routes.welcomeScreen);
+    } catch (error) {
+      Get.snackbar('Error!', error.toString(),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red.shade200,
+          colorText: Colors.white);
+    }
+  }
 }

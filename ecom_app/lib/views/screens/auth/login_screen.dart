@@ -23,11 +23,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+        backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white ,
         elevation: 0,
       ),
-      backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
       body: SingleChildScrollView(
         child: Column(children: [
           SizedBox(
@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                           text: 'LOG',
                           fontSize: 28,
                           fontWeight: FontWeight.w500,
-                          color: Get.isDarkMode ? mainColor : pinkClr,
+                          color: Get.isDarkMode ? pinkClr : mainColor,
                           underLine: TextDecoration.none),
                       const SizedBox(
                         width: 3,
@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                           text: 'IN',
                           fontSize: 28,
                           fontWeight: FontWeight.w500,
-                          color: Get.isDarkMode ? Colors.black : Colors.white,
+                          color: Get.isDarkMode ? Colors.white :Colors.black ,
                           underLine: TextDecoration.none),
                     ],
                   ),
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                       prefixIcon: Image.asset('assets/images/email.png',
-                          color: Get.isDarkMode ? mainColor : pinkClr),
+                          color: Get.isDarkMode ? pinkClr : mainColor ),
                       suffixIcon: Text(''),
                       hintText: 'Email'),
                   const SizedBox(
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                           }
                         },
                         prefixIcon: Image.asset('assets/images/lock.png',
-                            color: Get.isDarkMode ? mainColor : pinkClr),
+                            color: Get.isDarkMode ? pinkClr : mainColor),
                         suffixIcon: IconButton(
                           onPressed: () {
                             controller.visibility();
@@ -119,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                             text: 'Forget Password ?',
                             fontSize: 14,
                             fontWeight: FontWeight.normal,
-                            color: Get.isDarkMode ? Colors.black : Colors.white,
+                            color: Get.isDarkMode ? Colors.white : Colors.black ,
                             underLine: TextDecoration.none)),
                   ),
                   const SizedBox(
@@ -148,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                       text: 'OR',
                       fontSize: 18,
                       fontWeight: FontWeight.normal,
-                      color: Get.isDarkMode ? Colors.black : Colors.white,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                       underLine: TextDecoration.none),
                   const SizedBox(height: 20),
                   Row(

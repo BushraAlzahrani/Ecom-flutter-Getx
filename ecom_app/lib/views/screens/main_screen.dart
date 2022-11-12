@@ -10,9 +10,9 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Obx((){
-        return Scaffold(
+    return SafeArea(child: Obx(() {
+      return Scaffold(
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
           elevation: 0,
           leading: Container(),
@@ -22,46 +22,50 @@ class MainScreen extends StatelessWidget {
           ],
           title: Text(controller.title[controller.currentIndex.value]),
           centerTitle: true,
-          backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
+          backgroundColor: Get.isDarkMode ? pinkClr : mainColor,
         ),
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+          backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
           currentIndex: controller.currentIndex.value,
           items: [
             BottomNavigationBarItem(
-                activeIcon: Icon(Icons.home,
-                 color:  Get.isDarkMode ? mainColor : pinkClr,),
+                activeIcon: Icon(
+                  Icons.home,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
+                ),
                 icon: Icon(
                   Icons.home,
-                  color:  Get.isDarkMode ? Colors.black : Colors.white,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: ''),
-
-                  BottomNavigationBarItem(
-                activeIcon: Icon(Icons.category,
-                 color:  Get.isDarkMode ? mainColor : pinkClr,),
+            BottomNavigationBarItem(
+                activeIcon: Icon(
+                  Icons.category,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
+                ),
                 icon: Icon(
                   Icons.category,
-                  color:  Get.isDarkMode ? Colors.black : Colors.white,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: ''),
-
-                  BottomNavigationBarItem(
-                activeIcon: Icon(Icons.favorite,
-                 color:  Get.isDarkMode ? mainColor : pinkClr,),
+            BottomNavigationBarItem(
+                activeIcon: Icon(
+                  Icons.favorite,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
+                ),
                 icon: Icon(
                   Icons.favorite,
-                  color:  Get.isDarkMode ? Colors.black : Colors.white,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: ''),
-
-                  BottomNavigationBarItem(
-                activeIcon: Icon(Icons.settings,
-                 color:  Get.isDarkMode ? mainColor : pinkClr,),
+            BottomNavigationBarItem(
+                activeIcon: Icon(
+                  Icons.settings,
+                  color: Get.isDarkMode ? pinkClr : mainColor,
+                ),
                 icon: Icon(
                   Icons.settings,
-                  color:  Get.isDarkMode ? Colors.black : Colors.white,
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
                 ),
                 label: ''),
           ],
@@ -70,10 +74,11 @@ class MainScreen extends StatelessWidget {
           },
           type: BottomNavigationBarType.fixed,
         ),
-        body: IndexedStack(index: controller.currentIndex.value,
-        children: controller.taps.value,),
+        body: IndexedStack(
+          index: controller.currentIndex.value,
+          children: controller.taps.value,
+        ),
       );
-      })
-    );
+    }));
   }
 }

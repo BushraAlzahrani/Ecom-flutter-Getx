@@ -22,7 +22,7 @@ class ThemesApp {
   );
 
   static final dark = ThemeData(
-    primaryColor: darkGreyClr,
+    primaryColor: pinkClr,
     backgroundColor: darkGreyClr,
     brightness: Brightness.dark,
   );

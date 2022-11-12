@@ -25,7 +25,7 @@ final controller = Get.find<AuthController>();
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10)),
-            child: controller.isCheckBox? Image.asset('assets/images/check.png', color: Get.isDarkMode? mainColor : pinkClr): Container(),
+            child: controller.isCheckBox? Image.asset('assets/images/check.png', color: Get.isDarkMode? pinkClr : mainColor): Container(),
           ),
         ),
         const SizedBox(
@@ -37,13 +37,13 @@ final controller = Get.find<AuthController>();
                 text: 'I accept ',
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
-                color: Get.isDarkMode? Colors.black: Colors.white,
+                color: Get.isDarkMode?  Colors.white : Colors.black,
                 underLine: TextDecoration.none),
                 TextUtils(
                 text: 'terms & conditions',
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
-                color: Get.isDarkMode? Colors.black: Colors.white,
+                color: Get.isDarkMode?  Colors.white : Colors.black,
                 underLine: TextDecoration.underline),
           ],
         )
