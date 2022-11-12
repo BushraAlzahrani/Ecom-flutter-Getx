@@ -1,7 +1,7 @@
 import 'package:ecom_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../../logic/controllers/auth_controller.dart';
 import '../../../utils/my_string.dart';
 import '../../widgets/auth/auth_button.dart';
 import '../../widgets/auth/text_from_field.dart';
@@ -10,6 +10,7 @@ class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
+    final controller = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -88,10 +89,17 @@ class ForgetPasswordScreen extends StatelessWidget {
                     const SizedBox(
                       height: 50,
                     ),
-                    AuthButton(
-                      onPressed: () {},
+                  GetBuilder<AuthController>(builder: (_){
+                    return   AuthButton(
+                      onPressed: () {
+                       String email= emailController.text.trim();
+                        if(formKey.currentState!.validate()){
+                          controller.resetPassword(email);
+                        }
+                      },
                       text: 'SEND',
-                    ),
+                    );
+                  })
                   ],
                 ),
               ),

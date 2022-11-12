@@ -1,6 +1,7 @@
 import 'package:ecom_app/logic/controllers/auth_controller.dart';
 import 'package:ecom_app/utils/theme.dart';
 import 'package:ecom_app/views/widgets/text_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../routes/routes.dart';
@@ -19,7 +20,7 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-final controller = Get.find<AuthController>(); 
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -99,32 +100,34 @@ final controller = Get.find<AuthController>();
                   const SizedBox(
                     height: 20,
                   ),
-                  GetBuilder<AuthController>(builder: (_){
-                      return AuthTextFromField(
-                      controller: passwordController,
-                      obscureText: controller.isVisibility? false : true,
-                      validator: (value) {
-                        if (value.toString().length < 6) {
-                          return 'Password should be longer or equal to 6 characters';
-                        } else {
-                          return null;
-                        }
-                      },
-                      prefixIcon: Image.asset('assets/images/lock.png',
-                          color: Get.isDarkMode ? mainColor : pinkClr),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          controller.visibility();
+                  GetBuilder<AuthController>(builder: (_) {
+                    return AuthTextFromField(
+                        controller: passwordController,
+                        obscureText: controller.isVisibility ? false : true,
+                        validator: (value) {
+                          if (value.toString().length < 6) {
+                            return 'Password should be longer or equal to 6 characters';
+                          } else {
+                            return null;
+                          }
                         },
-                        icon: controller.isVisibility? const Icon(
-                          Icons.visibility_off,
-                          color: Colors.black,
-                        ) : const Icon(
-                          Icons.visibility,
-                          color: Colors.black,
+                        prefixIcon: Image.asset('assets/images/lock.png',
+                            color: Get.isDarkMode ? mainColor : pinkClr),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            controller.visibility();
+                          },
+                          icon: controller.isVisibility
+                              ? const Icon(
+                                  Icons.visibility_off,
+                                  color: Colors.black,
+                                )
+                              : const Icon(
+                                  Icons.visibility,
+                                  color: Colors.black,
+                                ),
                         ),
-                      ),
-                      hintText: 'Password');
+                        hintText: 'Password');
                   }),
                   const SizedBox(
                     height: 50,
@@ -133,10 +136,27 @@ final controller = Get.find<AuthController>();
                   const SizedBox(
                     height: 50,
                   ),
-                  AuthButton(
-                    onPressed: () {},
-                    text: 'SGIN UP',
-                  ),
+                  GetBuilder<AuthController>(builder: (_) {
+                    return AuthButton(
+                      onPressed: () {
+                        if (controller.isCheckBox == false) {
+                          Get.snackbar(
+                              'Check Box', 'Please, Accept terms & conditions',
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor: Colors.green,
+                              colorText: Colors.white);
+                        } else if (formKey.currentState!.validate()) {
+                          String name = nameController.text.trim();
+                          String email = emailController.text.trim();
+                          String password = passwordController.text;
+                          controller.signUpUsingFirebase(
+                              name: name, email: email, password: password);
+                              controller.isCheckBox == true;
+                        }
+                      },
+                      text: 'SGIN UP',
+                    );
+                  })
                 ]),
               ),
             ),
