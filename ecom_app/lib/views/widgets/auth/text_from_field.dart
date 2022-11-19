@@ -24,6 +24,7 @@ class AuthTextFromField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      style: TextStyle(color: Colors.black),
       obscureText: obscureText,
       cursorColor: Colors.black,
       keyboardType: TextInputType.text,

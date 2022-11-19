@@ -15,9 +15,10 @@ class ThemeController {
   }
 
   ThemeMode get themeDataGet =>
-      getThemeDataFromBox() ? ThemeMode.light : ThemeMode.dark;
+      getThemeDataFromBox() ? ThemeMode.dark : ThemeMode.light;
 
   void changeTheme() {
+    print("this is theme ${boxStorage.read<bool>(key)}");
     Get.changeThemeMode(
         getThemeDataFromBox() ? ThemeMode.light : ThemeMode.dark);
     saveThemeDataInBox(!getThemeDataFromBox());

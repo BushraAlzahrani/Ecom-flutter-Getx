@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
+import 'package:ecom_app/logic/controllers/cart_controller.dart';
 import 'package:ecom_app/logic/controllers/main_controller.dart';
+import 'package:ecom_app/routes/routes.dart';
 import 'package:ecom_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +10,7 @@ class MainScreen extends StatelessWidget {
   MainScreen({super.key});
 
   final controller = Get.find<MainController>();
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,19 @@ class MainScreen extends StatelessWidget {
           elevation: 0,
           leading: Container(),
           actions: [
-            IconButton(
-                onPressed: () {}, icon: Image.asset('assets/images/shop.png'))
+           Obx(()=>  Badge(
+                position: BadgePosition.topEnd(top: 0, end: 3),
+                animationDuration: const Duration(milliseconds: 300),
+                animationType: BadgeAnimationType.slide,
+                badgeContent: Text(
+                  cartController.quantity().toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                child: IconButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.cartScreen);
+                    },
+                    icon: Image.asset('assets/images/shop.png'))),)
           ],
           title: Text(controller.title[controller.currentIndex.value]),
           centerTitle: true,
