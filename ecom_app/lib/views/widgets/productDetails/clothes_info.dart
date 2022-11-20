@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_simple_rating_bar/flutter_simple_rating_bar.dart';
+import 'package:flutter_simple_rating_bar/flutter_simple_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import '../../../logic/controllers/product_controller.dart';
@@ -84,19 +84,19 @@ class ClothesInfo extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              // RatingBar(
-              //   rating: rate,
-              //   icon: const Icon(Icons.star, size: 20, color: Colors.grey),
-              //   starCount: 5,
-              //   spacing: 1,
-              //   size: 20,
-              //   isIndicator: false,
-              //   allowHalfRating: true,
-              //   onRatingCallback: (value, isIndictor) {
-              //     isIndictor.value = true;
-              //   },
-              //   color: Colors.orangeAccent,
-              // ),
+              RatingBar(
+                rating: rate,
+                icon: const Icon(Icons.star, size: 20, color: Colors.grey),
+                starCount: 5,
+                spacing: 1,
+                size: 20,
+                isIndicator: false,
+                allowHalfRating: true,
+                onRatingCallback: (value, isIndictor) {
+                  isIndictor.value = true;
+                },
+                color: Colors.orangeAccent,
+              ),
             ],
           ),
           const SizedBox(

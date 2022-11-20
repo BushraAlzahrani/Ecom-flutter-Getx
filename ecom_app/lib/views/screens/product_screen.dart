@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/product_models.dart';
+import '../widgets/productDetails/add_cart.dart';
 import '../widgets/productDetails/clothes_info.dart';
 import '../widgets/productDetails/image_sliders.dart';
+import '../widgets/productDetails/size_list.dart';
 
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -28,11 +30,11 @@ class ProductDetailsScreen extends StatelessWidget {
                 rate: productModels.rating.rate,
                 description: productModels.description,
               ),
-              // const SizeList(),
-              // AddCart(
-              //   price: productModels.price,
-              //   productModels: productModels,
-              // ),
+              const SizeList(),
+              AddCart(
+                price: productModels.price,
+                productModels: productModels,
+              ),
             ],
           ),
         ),
