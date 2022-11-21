@@ -1,3 +1,4 @@
+import 'package:ecom_app/language/localiztion.dart';
 import 'package:ecom_app/logic/controllers/theme_controller.dart';
 import 'package:ecom_app/utils/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'routes/routes.dart';
+import 'utils/my_string.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +24,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      locale: Locale(GetStorage().read<String>('lang').toString()),
+      translations: LocaliztionApp(),
+      fallbackLocale: Locale(ene),
       theme: ThemesApp.light,
       darkTheme: ThemesApp.dark,
       themeMode: ThemeController().themeDataGet,
